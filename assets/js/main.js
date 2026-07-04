@@ -1,3 +1,5 @@
+const { createElement } = require("react");
+
 const startBtn = document.getElementById("startBtn");
 const guessInput = document.getElementById("guessInput");
 const checkBtn = document.getElementById("checkBtn");
@@ -49,6 +51,7 @@ function checkNumber(num) {
     num = parseInt(num);
     contador++;
     count.textContent = contador;
+    
     // Comprobar que sea un number
     if (num === randomNumber){
         confirm("Has ganado.");
