@@ -4,13 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="assets/js/main.js"></script>
+    <title>Adivina el número</title>
+    <script src="assets/js/main.js" defer></script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <div id="resultado"></div>
+<h1>Adivina el número</h1>
+
+<button id="startBtn">Iniciar partida</button>
+
+<input type="number" id="guessInput" placeholder="Introduce un número" disabled>
+<button id="checkBtn" disabled>Comprobar</button>
+
+<p id="message"></p>
+
 </body>
 
 </html>
