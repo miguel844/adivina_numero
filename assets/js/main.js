@@ -5,15 +5,12 @@ const message = document.getElementById("message");
 const history = document.getElementById("history");
 const count = document.getElementById("count");
 
-
 let randomNumber;
 let contador = 0;
 history.innerHTML = "";
 message.innerHTML = "";
 
-
 resetGame();
-
 
 startBtn.addEventListener("click", function () {
     initGame();
@@ -49,24 +46,42 @@ function resetGame() {
 
 function checkNumber(num) {
     num = parseInt(num);
-    contador++;
-    count.textContent = contador;
-    
+
     if (isNaN(num)) {
         message.innerHTML += "<li>No has introducido un numero.</li>";
-    } else {
-        if (num === randomNumber) {
-            message.innerHTML += "<li>Has ganado. Has encontrado el número " + num + ".</li>";
-            confirm("Has ganado.");
-
-            history.innerHTML += "<li>Has acertado el numero " + randomNumber + " en " + contador + " intentos.</li>";
-
-            resetGame();
-        } else if (num > randomNumber) {
-            message.innerHTML += "<li>El número " + num + " es mayor.</li>";
-        } else {
-            message.innerHTML += "<li>El número " + num + " es menor.</li>";
-        }
+        return;
     }
 
+    contador++;
+    count.textContent = contador;
+
+    if (num === randomNumber) {
+        message.innerHTML += "<li>Has ganado. Has encontrado el número " + num + ".</li>";
+        alert("Has ganado.");
+
+        history.innerHTML += "<li>Has acertado el numero " + randomNumber + " en " + contador + " intentos.</li>";
+
+        resetGame();
+        return;
+    }
+    
+    if (contador === 10) {
+        loseGame();
+        return;
+    }
+
+    if (num > randomNumber) {
+        message.innerHTML += "<li>El número " + num + " es mayor.</li>";
+    } else {
+        message.innerHTML += "<li>El número " + num + " es menor.</li>";
+    }
+
+}
+
+function loseGame() {
+    message.innerHTML += "<li>Ya has intentado 10 veces. No has logrado adivinar el número " + randomNumber + "</li>";
+    history.innerHTML += "<li>No has acertado el numero " + randomNumber + ".</li>";
+
+    alert("Has perdido.");
+    resetGame();
 }
