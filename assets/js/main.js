@@ -1,5 +1,3 @@
-const { createElement } = require("react");
-
 const startBtn = document.getElementById("startBtn");
 const guessInput = document.getElementById("guessInput");
 const checkBtn = document.getElementById("checkBtn");
@@ -10,6 +8,8 @@ const count = document.getElementById("count");
 
 let randomNumber;
 let contador = 0;
+history.innerHTML = "";
+message.innerHTML = "";
 
 
 resetGame();
@@ -20,7 +20,7 @@ startBtn.addEventListener("click", function () {
 });
 
 checkBtn.addEventListener("click", function () {
-    checkNumber( guessInput.value);
+    checkNumber(guessInput.value);
 })
 
 guessInput.addEventListener("keydown", function (event) {
@@ -36,7 +36,7 @@ function initGame() {
     randomNumber = Math.floor(Math.random() * 100) + 1;
     contador = 0;
     count.textContent = contador;
-    message.value = "";
+    message.innerHTML = "";
     console.log("El numero a adivinar es el " + randomNumber);
 }
 
@@ -52,14 +52,21 @@ function checkNumber(num) {
     contador++;
     count.textContent = contador;
     
-    // Comprobar que sea un number
-    if (num === randomNumber){
-        confirm("Has ganado.");
-        resetGame();
-    } else if(num > randomNumber){
-        console.log("El número "+ num +" es mayor.");
+    if (isNaN(num)) {
+        message.innerHTML += "<li>No has introducido un numero.</li>";
     } else {
-        console.log("El número "+ num +" es menor.");
-    }  
+        if (num === randomNumber) {
+            message.innerHTML += "<li>Has ganado. Has encontrado el número " + num + ".</li>";
+            confirm("Has ganado.");
+
+            history.innerHTML += "<li>Has acertado el numero " + randomNumber + " en " + contador + " intentos.</li>";
+
+            resetGame();
+        } else if (num > randomNumber) {
+            message.innerHTML += "<li>El número " + num + " es mayor.</li>";
+        } else {
+            message.innerHTML += "<li>El número " + num + " es menor.</li>";
+        }
+    }
 
 }
