@@ -1,4 +1,9 @@
+body{
+    text-align: center;
+    justify-content: center;
+}
 #result{
     display: flex;
     gap: 60px;
+    justify-content: space-around;
 }
